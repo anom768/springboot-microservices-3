@@ -1,5 +1,6 @@
 server:
   port: 8081
+
 spring:
   application:
     name: sm3-fraud-service
@@ -15,3 +16,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
+eureka:
+  client:
+    service-url:
+      defaultZone: "http://localhost:8761/eureka"
