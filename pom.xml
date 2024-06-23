@@ -12,6 +12,7 @@
 
     <modules>
         <module>sm3-customer-service</module>
+        <module>sm3-fraud-service</module>
     </modules>
 
     <properties>

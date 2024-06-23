@@ -1,11 +1,10 @@
 server:
-  port: 8080
-
+  port: 8081
 spring:
   application:
-    name: sm3-customer-service
+    name: sm3-fraud-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/customer
+    url: jdbc:postgresql://localhost:5432/fraud
     username: postgres
     password: postgres
   jpa:
