@@ -1,4 +1,4 @@
-package com.bangkitanom.sm3.customer.dto;
+package com.bangkitanom.sm3.customer;
 
 public record CustomerRegistrationRequest(
         String firstName,

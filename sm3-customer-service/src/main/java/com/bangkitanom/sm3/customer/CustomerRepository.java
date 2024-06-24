@@ -1,6 +1,5 @@
-package com.bangkitanom.sm3.customer.repository;
+package com.bangkitanom.sm3.customer;
 
-import com.bangkitanom.sm3.customer.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {

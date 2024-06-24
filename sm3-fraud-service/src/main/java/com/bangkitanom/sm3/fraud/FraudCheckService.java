@@ -1,7 +1,5 @@
-package com.bangkitanom.sm3.fraud.service;
+package com.bangkitanom.sm3.fraud;
 
-import com.bangkitanom.sm3.fraud.model.FraudCheckHistory;
-import com.bangkitanom.sm3.fraud.repository.FraudCheckRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

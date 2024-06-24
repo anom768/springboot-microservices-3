@@ -1,4 +1,4 @@
-package com.bangkitanom.sm3.customer.config;
+package com.bangkitanom.sm3.customer;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;

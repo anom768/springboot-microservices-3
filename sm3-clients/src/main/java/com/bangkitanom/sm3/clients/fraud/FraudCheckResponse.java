@@ -1,4 +1,4 @@
-package com.bangkitanom.sm3.fraud.dto;
+package com.bangkitanom.sm3.clients.fraud;
 
 public record FraudCheckResponse(Boolean isFraudster) {
 }

@@ -1,7 +1,6 @@
-package com.bangkitanom.sm3.fraud.controller;
+package com.bangkitanom.sm3.fraud;
 
-import com.bangkitanom.sm3.fraud.dto.FraudCheckResponse;
-import com.bangkitanom.sm3.fraud.service.FraudCheckService;
+import com.bangkitanom.sm3.clients.fraud.FraudCheckResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
