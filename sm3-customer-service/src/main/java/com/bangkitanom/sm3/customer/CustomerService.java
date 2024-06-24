@@ -2,6 +2,8 @@ package com.bangkitanom.sm3.customer;
 
 import com.bangkitanom.sm3.clients.fraud.FraudCheckResponse;
 import com.bangkitanom.sm3.clients.fraud.FraudClient;
+import com.bangkitanom.sm3.clients.notification.NotificationClient;
+import com.bangkitanom.sm3.clients.notification.NotificationRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -13,6 +15,7 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
     private final FraudClient fraudClient;
+    private final NotificationClient notificationClient;
 
     public void register(CustomerRegistrationRequest customerRegistrationRequest) {
         Customer customer = Customer.builder()
@@ -39,6 +42,12 @@ public class CustomerService {
         }
 
         // todo: send notification
+        NotificationRequest notificationRequest = new NotificationRequest(
+                customer.getId(),
+                customer.getEmail(),
+                String.format("Hi %s, welcome to Anomu-Service...", customer.getFirstName())
+        );
+        notificationClient.send(notificationRequest);
     }
 
 }
