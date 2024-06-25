@@ -17,6 +17,7 @@
         <module>sm3-clients</module>
         <module>sm3-notification-service</module>
         <module>sm3-api-gateway</module>
+        <module>sm3-amqp</module>
     </modules>
 
     <properties>

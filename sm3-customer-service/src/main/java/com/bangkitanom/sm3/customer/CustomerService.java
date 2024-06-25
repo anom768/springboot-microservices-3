@@ -1,21 +1,19 @@
 package com.bangkitanom.sm3.customer;
 
+import com.bangkitanom.sm3.amqp.RabbitMQMessageProducer;
 import com.bangkitanom.sm3.clients.fraud.FraudCheckResponse;
 import com.bangkitanom.sm3.clients.fraud.FraudClient;
-import com.bangkitanom.sm3.clients.notification.NotificationClient;
 import com.bangkitanom.sm3.clients.notification.NotificationRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
-    private final RestTemplate restTemplate;
     private final FraudClient fraudClient;
-    private final NotificationClient notificationClient;
+    private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
     public void register(CustomerRegistrationRequest customerRegistrationRequest) {
         Customer customer = Customer.builder()
@@ -41,13 +39,18 @@ public class CustomerService {
             throw new IllegalStateException("fraudster");
         }
 
-        // todo: send notification
+        // todo: send notification to rabbitmq
         NotificationRequest notificationRequest = new NotificationRequest(
                 customer.getId(),
                 customer.getEmail(),
                 String.format("Hi %s, welcome to Anomu-Service...", customer.getFirstName())
         );
-        notificationClient.send(notificationRequest);
+        rabbitMQMessageProducer.publish(
+                notificationRequest,
+                "internal.exchange",
+                "internal.notification.routing-key"
+        );
+        //notificationClient.send(notificationRequest);
     }
 
 }
