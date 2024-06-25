@@ -34,15 +34,89 @@ services:
     container_name: zipkin
     ports:
       - "9411:9411"
+    networks:
+      - spring
   rabbitmq:
     image: rabbitmq:3.9.11-management-alpine
     container_name: rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
+    networks:
+      - spring
+  sm3-eureka-server:
+    image: anom768/sm3-eureka-server:latest
+    container_name: sm3-eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    depends_on:
+      - zipkin
+  sm3-api-gateway:
+    image: anom768/sm3-api-gateway:latest
+    container_name: sm3-api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    depends_on:
+      - zipkin
+      - sm3-eureka-server
+  sm3-customer-service:
+    image: anom768/sm3-customer-service:latest
+    container_name: sm3-customer-service
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - postgres
+      - spring
+    depends_on:
+      - zipkin
+      - sm3-eureka-server
+      - postgres
+      - rabbitmq
+  sm3-fraud-service:
+    image: anom768/sm3-fraud-service:latest
+    container_name: sm3-fraud-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - postgres
+      - spring
+    depends_on:
+      - zipkin
+      - sm3-eureka-server
+      - postgres
+      - rabbitmq
+  sm3-notification-service:
+    image: anom768/sm3-notification-service:latest
+    container_name: sm3-notification-service
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - postgres
+      - spring
+    depends_on:
+      - zipkin
+      - sm3-eureka-server
+      - postgres
+      - rabbitmq
 
 networks:
   postgres:
+    driver: bridge
+  spring:
     driver: bridge
 
 volumes:

@@ -10,11 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <packaging>jar</packaging>
     <artifactId>sm3-clients</artifactId>
-
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-    </properties>
 
 </project>
