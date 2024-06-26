@@ -14,10 +14,10 @@
         <module>sm3-customer-service</module>
         <module>sm3-fraud-service</module>
         <module>sm3-eureka-server</module>
-<!--        <module>sm3-clients</module>-->
+        <module>sm3-clients</module>
         <module>sm3-notification-service</module>
         <module>sm3-api-gateway</module>
-<!--        <module>sm3-amqp</module>-->
+        <module>sm3-amqp</module>
     </modules>
 
     <properties>
